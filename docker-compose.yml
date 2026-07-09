@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: automation
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  invoice-parser:
+    build: ./services/invoice-parser-node
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+
+volumes:
+  db_data:
