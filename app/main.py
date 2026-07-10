@@ -5,6 +5,7 @@ from app.manager import routes as manager_routes
 from app.manager.models import Module
 
 app = FastAPI(title="Office Automation Suite")
+
 app.include_router(manager_routes.router)
 
 SEED_MODULES = [

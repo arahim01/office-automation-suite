@@ -15,7 +15,6 @@ templates = Jinja2Templates(directory="app/templates")
 def health():
     return {"status": "ok"}
 
-
 @router.get("/api/modules")
 def list_modules(db: Session = Depends(get_db)):
     modules = db.query(Module).order_by(Module.id).all()
@@ -47,5 +46,5 @@ def update_status(slug: str, status: str, db: Session = Depends(get_db)):
 def dashboard(request: Request, db: Session = Depends(get_db)):
     modules = db.query(Module).order_by(Module.id).all()
     return templates.TemplateResponse(
-        "dashboard.html", {"request": request, "modules": modules}
+        request, "dashboard.html", {"modules": modules}
     )
